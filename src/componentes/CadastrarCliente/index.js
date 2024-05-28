@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { 
-    cadastrarClientes,
-    clientePorId,
-    atualizarCliente, 
+import {
+  cadastrarClientes,
+  clientePorId,
+  atualizarCliente,
 } from "../ClienteServico";
 
 
@@ -60,9 +60,9 @@ function CadastrarClientes() {
 
   function pageTitle() {
     if (id) {
-        return <h2 className="text-center">Atualizar Cliente</h2>;
+      return <h2 className="text-center">Atualizar Cliente</h2>;
     } else {
-        return <h2 className="text-center">Cadastrar Cliente</h2>;
+      return <h2 className="text-center">Cadastrar Cliente</h2>;
     }
   }
 
@@ -70,34 +70,34 @@ function CadastrarClientes() {
   function salvarCliente(event) {
     event.preventDefault();
     const cliente = {
-        nome, cpf, email, senha, nrTelefone
+      nome, cpf, email, senha, nrTelefone
     };
     console.log(cliente);
 
     if (id) {
 
-        atualizarCliente(id, cliente).then((response) => {
-            console.log(response);
+      atualizarCliente(id, cliente).then((response) => {
+        console.log(response);
 
-            // Revisar depois
-            navigator("/pesqueiros/clientes");
-        })
+        // Revisar depois
+        navigator("/clientes");
+      })
         .catch((error) => {
-            console.error(error);
-        
+          console.error(error);
+
         });
     } else {
-        cadastrarClientes(cliente)
+      cadastrarClientes(cliente)
         .then((response) => {
-            console.log(response.data);
-            setMensagem(response.data);
+          console.log(response.data);
+          setMensagem(response.data);
 
-            // Revisar depois
-            navigator("/pesqueiros/clientes");
+          // Revisar depois
+          navigator("/clientes");
         })
         .catch((error) => {
-            console.error("Erro ao cadastrar cliente", error);
-            setMensagem("Erro ao cadastrar cliente. Por favor, tente novamente.");
+          console.error("Erro ao cadastrar cliente", error);
+          setMensagem("Erro ao cadastrar cliente. Por favor, tente novamente.");
         })
     }
   }
@@ -109,7 +109,7 @@ function CadastrarClientes() {
       <div className="row">
         <div className="card">
           {pageTitle()}
-  
+
           <div className="card-body">
             {mensagem && <div className="alert alert-success">{mensagem}</div>}
             <form>
@@ -118,11 +118,11 @@ function CadastrarClientes() {
                 <label className="form-label">Nome:</label>
                 <input
                   type="text"
-                  placeholder="Nome"
+                  placeholder="Digite seu nome"
                   name="nome"
                   value={nome}
                   className="form-control"
-                  readOnly
+                  onChange={manipulaNome}
                 ></input>
               </div>
 
@@ -130,11 +130,11 @@ function CadastrarClientes() {
                 <label className="form-label">CPF:</label>
                 <input
                   type="text"
-                  placeholder="CPF"
+                  placeholder="Digite seu CPF"
                   name="cpf"
                   value={cpf}
                   className="form-control"
-                  readOnly
+                  onChange={manipulaCpf}
                 ></input>
               </div>
 
@@ -142,11 +142,11 @@ function CadastrarClientes() {
                 <label className="form-label">Email:</label>
                 <input
                   type="text"
-                  placeholder="Email"
+                  placeholder="Digite seu Email"
                   name="email"
                   value={email}
                   className="form-control"
-                  readOnly
+                  onChange={manipulaEmail}
                 ></input>
               </div>
 
@@ -154,11 +154,11 @@ function CadastrarClientes() {
                 <label className="form-label">Senha:</label>
                 <input
                   type="text"
-                  placeholder="Senha"
+                  placeholder="Digite sua senha"
                   name="senha"
                   value={senha}
                   className="form-control"
-                  readOnly
+                  onChange={manipulaSenha}
                 ></input>
               </div>
 
@@ -166,16 +166,16 @@ function CadastrarClientes() {
                 <label className="form-label">Número de Telefone:</label>
                 <input
                   type="text"
-                  placeholder="Número de Telefone"
+                  placeholder="Digite seu Número de Telefone"
                   name="nrTelefone"
                   value={nrTelefone}
                   className="form-control"
-                  readOnly
+                  onChange={manipulaNrTelefone}
                 ></input>
               </div>
 
               <button className="btn btn-success" onClick={salvarCliente}>
-                Submit(" ")
+                Submit{" "}
               </button>
 
             </form>
