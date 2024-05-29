@@ -1,13 +1,15 @@
 import { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./styles.css";
-import { listaDeClientes } from "../ClienteServico";
+import { listaDeClientes, deletarCliente } from "../ClienteServico";
 import { useNavigate } from "react-router-dom";
 
 
 const ConsultaCliente = () => {
     const [clientes, setCliente] = useState([]);
     const navigator = useNavigate();
+    const [mensagem, setMensagem] = useState("")
+
 
     useEffect(() => {
         listaDeClientes()
@@ -25,6 +27,28 @@ const ConsultaCliente = () => {
 
     function atualizarCliente(id) {
         navigator(`/edit-cliente/${id}`);
+    }
+
+    function exclusaoCliente(id) {
+        console.log("Exclusão de Cliente por ID=", id)
+        deletarCliente(id).then((response) => {
+            getAllClientes();
+        })
+        .catch((error) => {
+            console.error(error);
+            setMensagem("Ocorreu um erro na exclusão de cliente.");
+        });
+    }
+
+    function getAllClientes() {
+        listaDeClientes()
+        .then((response) => {
+            setCliente(response.data);
+        })
+        .catch((error) => {
+            console.error(error);
+            setMensagem("Ocorreu um erro na consulta de informações de cliente.");
+        })
     }
 
     return (
@@ -45,6 +69,7 @@ const ConsultaCliente = () => {
                     </tr>
                 </thead>
                 <tbody className="Clientes">
+                    {mensagem && <div className="alert alert-success">{mensagem}</div>}{" "}
                     {clientes.map((cliente) => (
                         <tr key={cliente.id}>
                             <td>{cliente.id}</td>
@@ -54,8 +79,16 @@ const ConsultaCliente = () => {
                             <td>{cliente.senha}</td>
                             <td>{cliente.nrTelefone}</td>
                             <td>
+
                                 <button className="btn btn-info" onClick={() => atualizarCliente(cliente.id)}>
                                     Atualizar
+                                </button>
+
+                                <button className="btn btn-danger"
+                                onClick={() => exclusaoCliente(cliente.id)}
+                                style={{marginLeft: "10px"}}
+                                >
+                                    Excluir
                                 </button>
                             </td>
                         </tr>
