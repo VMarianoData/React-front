@@ -2,6 +2,8 @@ import ConsultaCliente from "./componentes/ConsultarCliente";
 import Header from "./componentes/Header";
 import Footer from "./componentes/Footer";
 import CadastrarClientes from "./componentes/CadastrarCliente";
+import ProprietarioConsulta from "./componentes/ProprietarioConsulta";
+import ConsultaEmbarcacao from './componentes/ConsultaEmbarcacao';
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 function App() {
@@ -27,12 +29,24 @@ function App() {
           <Route 
             path="/cad-cliente" 
             element={<CadastrarClientes />}
-            ></Route>
+          ></Route>
 
           {/* http://localhost:3000/pesqueiros/edit-cliente */}
           <Route 
             path="/edit-cliente/:id" 
             element={<CadastrarClientes />} 
+          ></Route>
+
+          {/*//http://localhost:8080/pesqueiros/proprietarios*/}
+          <Route 
+            path="/proprietarios" 
+            element={<ProprietarioConsulta />}
+          ></Route>
+
+          {/*//http://localhost:8080/pesqueiros/embarcacoes*/}
+          <Route 
+            path="/embarcacoes" 
+            element={<ConsultaEmbarcacao/>}
           ></Route>
 
         </Routes>

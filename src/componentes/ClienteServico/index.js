@@ -10,7 +10,7 @@ export const listaDeClientes = () => axios.get(url);
 export const clientePorId = (id) => axios.get(url + '/' + id)
 
 // Post
-export const cadastrarClientes = () => axios.post(url);
+export const cadastrarClientes = (cliente) => axios.post(url, cliente);
 
 // Put
 export const atualizarCliente = (id, cliente) => axios.put(url + '/' + id, cliente);

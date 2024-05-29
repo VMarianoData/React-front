@@ -21,6 +21,14 @@ const ConsultaCliente = () => {
             });
     }, []);
 
+    function ConsultarProprietario() {
+        navigator("/proprietarios")
+    }
+
+    function ConsultarEmbarcacao() {
+        navigator("/embarcacoes")
+    }
+
     function cadastrarCliente() {
         navigator("/cad-cliente");
     }
@@ -56,6 +64,14 @@ const ConsultaCliente = () => {
             <h5 className="text-center">Consulta clientes</h5>
             <button className="btn btn-primary bm-2" onClick={cadastrarCliente} >
                 Cadastrar Cliente
+            </button>
+
+            <button className="btn btn-primary bm-2" onClick={ConsultarProprietario} >
+                Consultar proprietarios
+            </button>
+
+            <button className="btn btn-primary bm-2" onClick={ConsultarEmbarcacao} >
+                Consultar Embarcação
             </button>
             <table className="table table-striped table-bordered">
                 <thead>
